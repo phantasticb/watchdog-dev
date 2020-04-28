@@ -1,0 +1,2 @@
+rootProject.name='Watchdog Dev'
+include ':app'
