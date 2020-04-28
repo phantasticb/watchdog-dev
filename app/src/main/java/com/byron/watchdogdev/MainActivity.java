@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     // Create a queue for API requests
     private RequestQueue requestQueue;
 
-    // Views
+    // Declare views
     private Button buttonAdd;
     private TextView symbolEntry;
     private RecyclerView mainDisplay;
