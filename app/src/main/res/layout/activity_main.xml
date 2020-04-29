@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#111111"
+    android:background="@color/darkBackground"
     tools:context=".MainActivity">
 
     <EditText
@@ -15,8 +15,8 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Enter a symbol"
-        android:textColorHint="#777777"
-        android:textColor="#FFFFFF"
+        android:textColorHint="@color/inactiveText"
+        android:textColor="@color/activeText"
         android:backgroundTint="@color/colorAccent"
         android:inputType="textCapCharacters"
         app:layout_constraintEnd_toStartOf="@+id/buttonAdd"
