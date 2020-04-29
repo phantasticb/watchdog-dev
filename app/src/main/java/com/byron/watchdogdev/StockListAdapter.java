@@ -1,5 +1,6 @@
 package com.byron.watchdogdev;
 
+import android.graphics.Color;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -49,10 +51,21 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
         // Translate the keys of the watchlist
         String symbol = symbols.keySet().toArray()[position].toString();
 
+        // Money format
+        DecimalFormat df = new DecimalFormat("0.00");
+
         // Set each text field to appropriate text, this method acts like a for loop
         Log.v("Adapter", "Adding " + symbol);
         symbolText.setText(symbol);
-        priceText.setText(symbols.get(symbol).get(0).toString());
+        priceText.setText(df.format(symbols.get(symbol).get(0)));
+
+        if(symbols.get(symbol).get(1) > 0) {
+            priceText.setTextColor(0xFF00DD00);
+        } else if(symbols.get(symbol).get(1) < 0) {
+            priceText.setTextColor(0xFFBB0000);
+        } else {
+            priceText.setTextColor(Color.GRAY);
+        }
     }
 
     // Self-explanatory
