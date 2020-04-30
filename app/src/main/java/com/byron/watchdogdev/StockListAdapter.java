@@ -29,7 +29,8 @@ import java.util.LinkedHashMap;
 
 public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.StockViewHolder> {
     // Include a variable for watchlist collected in input field to be passed to
-    private final LinkedHashMap<String, ArrayList<Double>> symbols;
+    private ArrayList<ArrayList<String>> symbols_list;
+
     private Context context;
 
     // Enum stock categories
@@ -48,8 +49,8 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
     }
 
     // Constructor passes watchlist data to member variable symbols
-    public StockListAdapter(Context activity, LinkedHashMap<String, ArrayList<Double>> data) {
-        symbols = data;
+    public StockListAdapter(Context activity, ArrayList<ArrayList<String>> data) {
+        symbols_list = data;
         context = activity;
     }
 
@@ -76,7 +77,9 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
         ImageView image = holder.image;
 
         // Translate the keys of the watchlist
-        String symbol = symbols.keySet().toArray()[position].toString();
+        String symbol = symbols_list.get(position).get(0);
+        double chg = Double.parseDouble(symbols_list.get(position).get(2));
+        double price = Double.parseDouble(symbols_list.get(position).get(1));
 
         // Money format
         DecimalFormat df = new DecimalFormat("0.00");
@@ -84,18 +87,17 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
         // Set each text field to appropriate text, this method acts like a for loop
         Log.v("Adapter", "Adding " + symbol);
         symbolText.setText(symbol);
-        priceText.setText(df.format(symbols.get(symbol).get(0)));
+        priceText.setText(df.format(price));
 
-        if(symbols.get(symbol).get(1) > 0) {
+        if(chg > 0) {
             priceText.setTextColor(0xFF00DD00);
-        } else if(symbols.get(symbol).get(1) < 0) {
+        } else if(chg < 0) {
             priceText.setTextColor(0xFFBB0000);
         } else {
             priceText.setTextColor(Color.GRAY);
         }
 
         // Set the proper image
-        Log.v("IMAGE FETCH", fetchImage(symbol).toString());
 
         switch(fetchImage(symbol)){
             case NULL:
@@ -104,47 +106,36 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
                 break;
             case TECH:
                 image.setImageResource(R.drawable.tech);
-                Log.v("IMAGE SET", "Setting image tech");
                 break;
             case MEDIA:
                 image.setImageResource(R.drawable.media);
-                Log.v("IMAGE SET", "Setting image tech");
                 break;
             case INDUSTRY:
                 image.setImageResource(R.drawable.industry);
-                Log.v("IMAGE SET", "Setting image tech");
                 break;
             case AIR:
                 image.setImageResource(R.drawable.air);
-                Log.v("IMAGE SET", "Setting image tech");
                 break;
             case SPACE:
                 image.setImageResource(R.drawable.space);
-                Log.v("IMAGE SET", "Setting image tech");
                 break;
             case FOOD:
                 image.setImageResource(R.drawable.food);
-                Log.v("IMAGE SET", "Setting image tech");
                 break;
             case SHOP:
                 image.setImageResource(R.drawable.shop);
-                Log.v("IMAGE SET", "Setting image tech");
                 break;
             case FINANCE:
                 image.setImageResource(R.drawable.finance);
-                Log.v("IMAGE SET", "Setting image tech");
                 break;
             case SOCIAL:
                 image.setImageResource(R.drawable.social);
-                Log.v("IMAGE SET", "Setting image tech");
                 break;
             case AUTO:
                 image.setImageResource(R.drawable.auto);
-                Log.v("IMAGE SET", "Setting image tech");
                 break;
             default:
                 image.setImageResource(R.color.darkElement);
-                Log.v("IMAGE SET", "Setting image default");
                 break;
         }
     }
@@ -178,8 +169,6 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
             JSONArray auto = jsonData.getJSONArray("auto");
             JSONArray finance = jsonData.getJSONArray("finance");
 
-            Log.v("JSON PARSE", tech.toString());
-
             // This is terrible
 
             if(jsonArrayContains(tech, symbol)) {
@@ -212,7 +201,6 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
     }
 
     private boolean jsonArrayContains(JSONArray jsonArray, String element) throws JSONException {
-        Log.v("JSON ARRAY READ", Boolean.toString(jsonArray.toString().contains(element)));
 
         ArrayList<String> list = new ArrayList<String>();
         for(int i = 0; i < jsonArray.length(); i++) {
@@ -225,7 +213,7 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
     // Self-explanatory
     @Override
     public int getItemCount() {
-        return symbols.size();
+        return symbols_list.size();
     }
 
     // Holds the view for the recycler view and child components
