@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         buttonAdd.setOnClickListener(new addButtonListener());
 
         mainDisplay.setLayoutManager(new LinearLayoutManager(this));
-        stockListAdapter = new StockListAdapter(symbols);
+        stockListAdapter = new StockListAdapter(this, symbols);
         mainDisplay.setAdapter(stockListAdapter);
 
         // Request Queue

@@ -1,0 +1,42 @@
+{
+  "tech":
+          [
+            "AMD", "INTC", "QCOM", "AVGO", "AAPL", "MSFT", "NVDA"
+          ],
+  "industry":
+          [
+            "CAT"
+          ],
+  "media":
+          [
+            "NFLX", "SPOT", "ATVI"
+          ],
+  "social":
+          [
+            "SNAP", "FB", "GOOG", "TWTR"
+          ],
+  "shop":
+          [
+            "COST", "WMT", "TGT", "AMZN", "SHOP"
+          ],
+  "food":
+          [
+            "MCD", "KO"
+          ],
+  "air":
+          [
+            "BA", "AAL", "DAL", "LUV", "UAL"
+          ],
+  "space":
+          [
+            "SPCE"
+          ],
+  "finance":
+          [
+            "BAC", "JPM", "V", "MA", "PYPL"
+          ],
+  "auto":
+          [
+            "TSLA", "F", "GM"
+          ]
+}
