@@ -3,4 +3,9 @@
     <color name="colorPrimary">#4000FF</color>
     <color name="colorPrimaryDark">#2000DD</color>
     <color name="colorAccent">#4000FF</color>
+    <color name="darkBackground">#111111</color>
+    <color name="activeText">#DDDDDD</color>
+    <color name="darkElement">#222222</color>
+    <color name="imageTint">#BB000000</color>
+    <color name="inactiveText">#777777</color>
 </resources>

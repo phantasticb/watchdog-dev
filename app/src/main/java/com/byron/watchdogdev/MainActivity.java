@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         buttonAdd.setOnClickListener(new addButtonListener());
 
         mainDisplay.setLayoutManager(new LinearLayoutManager(this));
-        stockListAdapter = new StockListAdapter(symbols);
+        stockListAdapter = new StockListAdapter(this, symbols);
         mainDisplay.setAdapter(stockListAdapter);
 
         // Request Queue
@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // Just show an error message if something broke on a deep level
                         Toast toast = Toast.makeText(getApplicationContext(),
-                                "Invalid symbol", Toast.LENGTH_LONG);
+                                "API request failed", Toast.LENGTH_LONG);
 
                         toast.show();
                     }
